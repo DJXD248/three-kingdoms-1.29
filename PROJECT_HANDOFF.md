@@ -45,6 +45,13 @@
 
 ## 3. 当前主线与分支
 
+### 已完成任务
+- 标记旧的、不再使用的代码为 LEGACY / NON_AUTHORITATIVE
+- 修复 npm 依赖问题，包括依赖升级和风险记录
+
+### GPT 主线
+当前已知基线：`Phase 5.35.26.4.1`
+
 ### GPT 主线
 当前已知基线：`Phase 5.35.26.4.1`
 
@@ -56,8 +63,8 @@
 Qoder 使用独立 `1.x` 版本号，不等同于 GPT `5.35.x`。
 分支记录必须明确 `baseline_from` / `branch_scope`。
 
-当前最新 Qoder 版本：`1.29`
-本轮调整：只修复 Vite/Rollup 可选依赖在干净环境或跨平台归档环境中缺失的问题；不改动游戏源码和玩法。
+当前最新 Qoder 版本：`1.29.2`
+本轮调整：修复依赖安全漏洞，升级 uuid、vite、xlsx 版本；备份 package.json 和 package-lock.json；验证 npm run check/build 通过；依赖审计警告已减少，xlsx 漏洞因无可用修复版本仍存在。
 
 版本号不能单独用于判断跨模型分支的先后关系。
 
