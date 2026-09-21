@@ -63,8 +63,9 @@
 Qoder 使用独立 `1.x` 版本号，不等同于 GPT `5.35.x`。
 分支记录必须明确 `baseline_from` / `branch_scope`。
 
-当前最新 Qoder 版本：`1.29.2`
-本轮调整：修复依赖安全漏洞，升级 uuid、vite、xlsx 版本；备份 package.json 和 package-lock.json；验证 npm run check/build 通过；依赖审计警告已减少，xlsx 漏洞因无可用修复版本仍存在。
+当前最新 Qoder 版本：`1.29.3`
+本轮调整（1.29.3）：修复 xlsx(SheetJS) 高危漏洞——npm 注册表无修复版本，依赖切换至 SheetJS 官方 CDN `https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz`（与 2.0 线同源同版；只读 API 兼容，业务源码零改动）；`npm run check` / `npm run build` 通过，`npm audit --audit-level=high` exit=0；dist 以修复版重建。
+上一轮（1.29.2）：修复依赖安全漏洞，升级 uuid、vite、xlsx 版本；备份 package.json 和 package-lock.json；验证 npm run check/build 通过；依赖审计警告已减少，xlsx 漏洞因当时 npm 注册表无可用修复版本仍存在（1.29.3 经 SheetJS CDN 修复）。
 
 版本号不能单独用于判断跨模型分支的先后关系。
 
@@ -300,6 +301,7 @@ Controllers 目标位置：
 - Git 迁移：1.29 已初始化独立仓库，加入 `.gitignore`，完成首个基线提交并打上 `v1.29` 标签；旧版本文件夹保留为备份。
 - 下一阶段：继续完善真实服务器连接、重连和技能运行时收敛；本机保存不等同于在线同步。
 - 已知风险：依赖审计问题仍延期，尚未执行强制升级。
+- 1.29.3：xlsx(SheetJS) 高危漏洞已经 SheetJS 官方 CDN 0.20.3 修复（check/build/audit-high 会话内验证通过）；剩 2 moderate（exceljs 传递依赖 uuid）维持延期。
 
 ## 9. 文档职责：规则与记录彻底分离
 

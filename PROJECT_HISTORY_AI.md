@@ -319,3 +319,25 @@ baseline_scope=Qoder independent 1.x branch; not merged into GPT 5.35.x mainline
 ### CURRENT REVIEW STATUS
 - Qoder 1.26 is reviewable as an independent branch but is not promoted to GPT mainline authoritative baseline by this audit.
 - Main unresolved architectural priority: canonicalize the live Skill Runtime and isolate/remove legacy skill/card/status/turn modules only after call-graph verification.
+
+---
+
+## Qoder 1.29.3：xlsx(SheetJS) 高危漏洞修复（与 2.0 线同步）
+
+**模型标记：** `[MODEL:QODER-AGENT]`
+**baseline_from：** `2cfcbbf`（附注标签 `v1.29.2`）
+**branch_scope：** `Qoder/1.29` 仓库
+
+### 修复
+- 根因与出路同 2.0 线记录（见 2.0 仓库 PROJECT_HISTORY_AI.md "Qoder 2.0.1/2.0.2"）：npm 注册表 xlsx 终版 0.18.5 含 GHSA-4r6h-8v6p-xvw6（原型污染）与 GHSA-5pgg-2g8v-p4x9（ReDoS），官方修复版仅经 SheetJS CDN 发布。
+- `npm install https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz --ignore-scripts`；业务源码零改动（唯一消费面 SkillEditor 只读导入路径，API 兼容）。
+
+### 验证（会话内独立执行）
+`npm run check` = 0；`npm run build` 成功（dist/index.html 2040.57 kB，以修复版重建）；`npm audit --audit-level=high` exit=0（剩 2 moderate：exceljs→uuid 链，延期）。运行时行为证据由 2.0 仓库同依赖版本的夹具回归测试 `xlsxSecureReader.test.ts` 提供（同一 browser 构建路径）。
+
+### Unresolved / Risk
+- exceljs→uuid 2 moderate：延期。
+- 本仓库为独立 Git 仓库，修复不自动传导至 2.0 仓库（已另行同步）。
+
+### Next route
+本版本线冻结回备份定位；活跃开发在 `Qoder/2.0` 仓库继续。

@@ -1356,3 +1356,9 @@ END_TURN → TURN_END → TURN_START → TURN_ACTIONS_RESET → DRAW_REQUIRED
 9. 独立 TypeScript 检查通过；Vite 构建无法在归档附带的依赖环境中复现，因为缺少 Rollup Linux optional dependency，因此 Qoder 的 build 结果保持“模型自报”，不能写成 GPT 独立验证。
 
 本轮不修改 Qoder 1.26 业务源码，只更新三份项目文档与归档边界；后续真正修改源码前，需先明确是否进入 Skill Runtime 唯一化阶段。
+
+---
+
+## Qoder 1.29.3 开发记录（2026-09，作者：Qoder 编码代理）
+
+与 2.0 仓库同步的漏洞修复轮：xlsx(SheetJS) 两个高危漏洞在 npm 注册表永远等不到修复（终版停在 0.18.5），官方修复版只在其 CDN 发布。本仓库把依赖直接指向 CDN 0.20.3，业务代码一行未改（技能编辑器只用读取接口）。类型检查、构建、audit 高危门禁全部通过，dist 用修复版重新生成。运行时正确性由 2.0 仓库新增的真实 .xlsx 夹具回归测试背书（同一构建路径）。剩余两项中危（exceljs 的传递依赖 uuid）维持延期。此后 1.29 线回到备份定位，活跃开发在 2.0 仓库继续。
