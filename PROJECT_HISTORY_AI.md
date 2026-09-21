@@ -341,3 +341,25 @@ baseline_scope=Qoder independent 1.x branch; not merged into GPT 5.35.x mainline
 
 ### Next route
 本版本线冻结回备份定位；活跃开发在 `Qoder/2.0` 仓库继续。
+
+---
+
+## Qoder 1.29.4：依赖安全清零（exceljs 统一 4.4.0 + uuid overrides）
+
+**模型标记：** `[MODEL:QODER-AGENT]`
+**baseline_from：** `38183d7`（附注标签 `v1.29.3`）
+**branch_scope：** `Qoder/1.29` 仓库（与 `Qoder/2.0` 仓库 `v2.0.3` 同轮决策）
+
+### 变更
+- exceljs `^3.4.0`（锁至 3.10.0）-> `^4.4.0`：与 2.0 线统一，终结两仓库不一致；1.29.2 当年"降级绕 uuid"的路线由更干净的 npm `overrides`（uuid -> `^11.1.1`）取代并作废。
+- `npm install`：removed 17 / added 5 packages（旧 exceljs 依赖树退场）；`npm audit` = **found 0 vulnerabilities**。
+
+### 验证（会话内独立执行）
+`npm run check` = 0；exceljs 导出（含条件格式）-> SheetJS CDN 0.20.3 读回冒烟 SMOKE OK；`npm run build` 成功（dist/index.html 1843.51 kB 重建，与 2.0 线产物体积收敛一致，佐证依赖树已对齐）。
+
+### Unresolved / Risk
+- cf-ext 分支未被冒烟直接触达（同 2.0.3 记录）；用户真机 Excel 回归 OPTIONAL。
+- 本线维持"备份/发布"定位，活跃开发在 2.0 仓库。
+
+### Next route
+依赖安全两仓库双双清零，无遗留。
