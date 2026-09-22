@@ -374,6 +374,7 @@ baseline_scope=Qoder independent 1.x branch; not merged into GPT 5.35.x mainline
 ### 变更
 - 本仓库新增远程 `origin` -> `https://github.com/DJXD248/three-kingdoms-1.29`（**private**），master 与全部标签（v1.29 / v1.29.2 / v1.29.3 / v1.29.4）已推送。
 - 本仓库无 GitHub Actions 工作流文件，远程仅作代码托管 + 异地备份用途；CI 验证在 2.0 仓库（其矩阵 Node 18/20 -> 22/24 的修复见 2.0 仓库 2.0.4 记录）。
+- 同轮新增 `README.md`（远程地址 / 推送代理 127.0.0.1:10808 的仓库级配置 / 验证命令）；两仓库均已 `git config http(s).proxy http://127.0.0.1:10808`（本机直连 github.com 超时所致）。
 - 文档登记（本轮），无源码/依赖变更，不另发版本号与标签。
 
 ### Next route
