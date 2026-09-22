@@ -363,3 +363,18 @@ baseline_scope=Qoder independent 1.x branch; not merged into GPT 5.35.x mainline
 
 ### Next route
 依赖安全两仓库双双清零，无遗留。
+
+---
+
+## Qoder 1.29.4 补充记录：接入 GitHub 私有远程（2.0 仓库 2.0.4 同轮）
+
+**模型标记：** `[MODEL:QODER-AGENT]`
+**baseline_from：** `036163f`（附注标签 `v1.29.4`）
+
+### 变更
+- 本仓库新增远程 `origin` -> `https://github.com/DJXD248/three-kingdoms-1.29`（**private**），master 与全部标签（v1.29 / v1.29.2 / v1.29.3 / v1.29.4）已推送。
+- 本仓库无 GitHub Actions 工作流文件，远程仅作代码托管 + 异地备份用途；CI 验证在 2.0 仓库（其矩阵 Node 18/20 -> 22/24 的修复见 2.0 仓库 2.0.4 记录）。
+- 文档登记（本轮），无源码/依赖变更，不另发版本号与标签。
+
+### Next route
+定位不变：备份/发布线；活跃开发在 2.0 仓库。
